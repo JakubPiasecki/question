@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <script>
+        let pytania = {{ pytania|tojson }};
+        let index = 0;
+
+        function showNextQuestion() {
+            let pytanie = pytania[index];
+            document.getElementById("pytanie").innerText = `Pytanie: ${pytanie.Pytanie}`;
+            document.getElementById("odpowiedz").innerText = "";
+            index++;
+            if (index >= pytania.length) {
+                index = 0;
+            }
+        }
+
+        function showAnswer() {
+            let pytanie = pytania[index - 1];
+            document.getElementById("odpowiedz").innerText = `Odpowiedź: ${pytanie.Odpowiedź}`;
+        }
+    </script>
+</head>
+<body onload="showNextQuestion()">
+<h1>Flashcards</h1>
+<div>
+    <p id="pytanie"></p>
+    <p id="odpowiedz"></p>
+</div>
+<button onclick="showAnswer()">Pokaż odpowiedź</button>
+<button onclick="showNextQuestion()">Następne pytanie</button>
+<br>
+<a href="{{ url_for('index') }}">Powrót do listy pytań</a>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Pytania</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+<h1>Lista pytań</h1>
+<ul>
+    {% for pytanie in pytania %}
+        <li>{{ pytanie['ID'] }}: {{ pytanie['Pytanie'] }} - {{ pytanie['Odpowiedź'] }}</li>
+    {% endfor %}
+</ul>
+<h2>Dodaj pytanie</h2>
+<form action="{{ url_for('dodaj_pytanie') }}" method="POST">
+    <label for="nowe_pytanie">Pytanie:</label>
+    <input type="text" name="nowe_pytanie" id="nowe_pytanie" required>
+    <label for="odpowiedz">Odpowiedź:</label>
+    <input type="text" name="odpowiedz" id="odpowiedz" required>
+    <button type="submit">Dodaj pytanie</button>
+</form>
+<h2>Flashcards</h2>
+<a href="{{ url_for('flashcards') }}">Przejdź do flashcards</a>
+
+</body>
+</html>
